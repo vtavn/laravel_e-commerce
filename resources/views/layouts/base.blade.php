@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/flexslider.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
@@ -42,8 +43,6 @@
 						</div>
 						<div class="topbar-menu right-menu">
 							<ul>
-								<li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
-								<li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
 								<li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="English" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu lang" >
@@ -67,6 +66,44 @@
 										</li>
 									</ul>
 								</li>
+								@if (Route::has('login'))
+									@auth
+										@if (Auth::user()->roles === 'admin')
+											<li class="menu-item menu-item-has-children parent" >
+												<a title="My Account" href="#">My Account ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<ul class="submenu curency" >
+													<li class="menu-item" >
+														<a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+													</li>
+													<li class="menu-item">
+														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+													</li>
+													<form id="logout-form" action="{{ route('logout') }}" method="post">
+														@csrf
+													</form>
+												</ul>
+											</li>
+										@else
+											<li class="menu-item menu-item-has-children parent" >
+												<a title="My Account" href="#">My Account ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<ul class="submenu curency" >
+													<li class="menu-item" >
+														<a title="Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+													</li>
+													<li class="menu-item">
+														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+													</li>
+													<form id="logout-form" action="{{ route('logout') }}" method="post">
+														@csrf
+													</form>
+												</ul>
+											</li>
+										@endif
+									@else
+										<li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
+										<li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
+									@endif
+								@endif
 							</ul>
 						</div>
 					</div>
@@ -76,7 +113,7 @@
 					<div class="mid-section main-info-area">
 
 						<div class="wrap-logo-top left-section">
-							<a href="index.html" class="link-to-home"><img src="{{ asset('assets/images/logo-top-1.png') }}" alt="mercado"></a>
+							<a href="/" class="link-to-home"><img src="{{ asset('assets/images/logo-top-1.png') }}" alt="mercado"></a>
 						</div>
 
 						<div class="wrap-search center-section">
@@ -122,11 +159,13 @@
 								</a>
 							</div>
 							<div class="wrap-icon-section minicart">
-								<a href="#" class="link-direction">
+								<a href="{{ route('product.cart') }}" class="link-direction">
 									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 									<div class="left-info">
-										<span class="index">4 items</span>
-										<span class="title">CART</span>
+										@if (Cart::count() > 0)
+											<span class="index">{{Cart::count()}} items</span>
+											<span class="title">CART</span>
+										@endif
 									</div>
 								</a>
 							</div>
@@ -159,19 +198,19 @@
 						<div class="container">
 							<ul class="nav primary clone-main-menu" id="mercado_main" data-menuname="Main menu" >
 								<li class="menu-item home-icon">
-									<a href="index.html" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
+									<a href="/" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
 								</li>
 								<li class="menu-item">
 									<a href="about-us.html" class="link-term mercado-item-title">About Us</a>
 								</li>
 								<li class="menu-item">
-									<a href="shop.html" class="link-term mercado-item-title">Shop</a>
+									<a href="/shop" class="link-term mercado-item-title">Shop</a>
 								</li>
 								<li class="menu-item">
-									<a href="cart.html" class="link-term mercado-item-title">Cart</a>
+									<a href="/cart" class="link-term mercado-item-title">Cart</a>
 								</li>
 								<li class="menu-item">
-									<a href="checkout.html" class="link-term mercado-item-title">Checkout</a>
+									<a href="/checkout" class="link-term mercado-item-title">Checkout</a>
 								</li>
 								<li class="menu-item">
 									<a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
