@@ -7229,3 +7229,19 @@ p.text-sm.text-gray-700.leading-5 {
     font-size: 16px;
     font-weight: bold;
 }
+
+.error {
+    color: red;
+}
+
+.pt-30 {
+    padding: 30px 0;
+}
+
+.price_old {
+    font-size: 13px!important;
+    font-weight: 300;
+    color: #aaaaaa!important;
+    text-decoration: line-through;
+    padding-left: 10px;
+}
