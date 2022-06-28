@@ -36,14 +36,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Description</label>
                                 <div class="col-md-4">
-                                    <textarea class="form-control" placeholder="Description" wire:model="description"></textarea>
+                                    <textarea class="form-control" placeholder="Description" wire:model="description" wire:ignore></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-4">Content</label>
                                 <div class="col-md-4">
-                                    <textarea class="form-control" placeholder="Content" wire:model="content"></textarea>
+                                    <textarea class="form-control" placeholder="Content" wire:model="content" wire:ignore></textarea>
                                 </div>
                             </div>
 

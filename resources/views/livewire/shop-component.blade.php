@@ -1,4 +1,4 @@
-	<main id="main" class="main-site left-sidebar">
+<main id="main" class="main-site left-sidebar">
 
 		<div class="container">
 
@@ -53,7 +53,6 @@
 						</div>
 
 					</div><!--end wrap shop control-->
-
 					<div class="row">
 
 						<ul class="product-list grid-products equal-container">
@@ -69,6 +68,14 @@
 											<a href="{{ route('product.details', ['slug' => $product->slug]) }}" class="product-name"><span>{{ $product->name }}</span></a>
 											<div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
 											<a href="#" class="btn add-to-cart" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">Add To Cart</a>
+										<div class="product-wish">
+											@if ($witems->contains($product->id))
+												<a href="#" wire:click.prevent="removeWishList({{$product->id }});"><i class="fa fa-heart fill-heart"></i></a>
+											@else
+												<a href="#" wire:click.prevent="addTopWishList({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})"><i class="fa fa-heart"></i></a>
+											@endif
+											
+										</div>
 										</div>
 									</div>
 								</li>

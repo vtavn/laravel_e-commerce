@@ -20,7 +20,7 @@
 - php artisan db:seed
 - php artisan make:livewire DetailsComponent
 - php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
-  
+
 - php artisan make:livewire CategoryComponent
 - php artisan make:livewire HeaderSearchComponent
 - php artisan make:livewire SearchComponent
@@ -38,5 +38,19 @@
 - php artisan make:model Sale -m
 - php artisan make:livewire admin/AdminSaleComponen
 
+- php artisan make:livewire WishListCountComponent
+- php artisan make:livewire CartCountComponent
+- php artisan make:livewire WishListComponent
+- php artisan make:model Coupon -m
+- php artisan make:livewire admin/adminCouponComponent
+- php artisan make:livewire admin/adminAddCouponComponent
+- php artisan make:livewire admin/adminEditCouponComponent
+- php artisan make:migration add_expiry_date_to_coupons_table --table=coupons
+- php artisan make:model Order -m
+- php artisan make:model OrderItem -m
+- php artisan make:model Shipping -m
+- php artisan make:model Transaction -m
+
+V40
 
 
