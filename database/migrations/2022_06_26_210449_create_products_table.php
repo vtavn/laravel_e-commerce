@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->text('content');
             $table->bigInteger('category_id')->unsigned()->nullable();
-            $table->decimal('price');
-            $table->decimal('sale_price')->nullable();
+            $table->decimal('price', $precision = 8, $scale = 0);
+            $table->decimal('sale_price', $precision = 8, $scale = 0)->nullable();
             $table->string('SKU');
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
