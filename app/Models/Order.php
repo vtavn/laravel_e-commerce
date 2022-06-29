@@ -15,8 +15,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function orderItems() {
-        return $this->hasMany(OrderItem::class);
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
     }
 
     public function shipping() {
@@ -26,4 +27,5 @@ class Order extends Model
     public function transaction() {
         return $this->hasOne(Transaction::class);
     }
+
 }

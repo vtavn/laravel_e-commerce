@@ -116,6 +116,11 @@ class CartComponent extends Component
 
     public function setAmountForCheckout()
     {
+        if(!Cart::instance('cart')->count() > 0) {
+            session()->forget('checkout');
+            return;
+        }
+
         if(session()->has('coupon'))
         {
             session()->put('checkout', [
@@ -126,6 +131,7 @@ class CartComponent extends Component
             ]);
         } else {
             session()->put('checkout', [
+                'discount' => '0',
                 'subtotal' => Cart::instance('cart')->subtotal(),
                 'tax' => Cart::instance('cart')->tax(),
                 'total'=> Cart::instance('cart')->total()

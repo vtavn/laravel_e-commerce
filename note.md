@@ -51,6 +51,14 @@
 - php artisan make:model Shipping -m
 - php artisan make:model Transaction -m
 
-V40
-
-
+- php artisan make:livewire ThankYouComponent
+- V42 + "cartalyst/stripe-laravel": "^13.0" + composer -> composer update | no using
+- php artisan make:livewire admin/AdminOrderComponent
+- php artisan make:livewire admin/AdminOrderDetailsComponent
+- php artisan make:livewire user/UserOrdersComponent
+- php artisan make:livewire user/UserOrderDetailsComponent
+- php artisan make:migration add_delivered_canceled_to_orders_table --table=orders
+- php artisan make:model Review -m
+- php artisan make:livewire user/UserReviewComponent
+- php artisan make:livewire user/UserChangePasswordComponent
+- 
