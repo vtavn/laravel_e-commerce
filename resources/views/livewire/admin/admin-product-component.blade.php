@@ -1,13 +1,4 @@
 <div>
-    <style>
-        nav svg {
-            height: 20px;
-        }
-        nav .hidden {d
-            display: block!important;
-        }
-        
-    </style>
     <div class="container pt-30">
         <div class="row">
             <div class="col-md-12">

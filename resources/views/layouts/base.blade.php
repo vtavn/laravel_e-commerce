@@ -95,6 +95,10 @@
 													<li class="menu-item" >
 														<a title="Coupons" href="{{ route('admin.coupons') }}">Coupons</a>
 													</li>
+
+													<li class="menu-item" >
+														<a title="Manger Orders" href="{{ route('admin.orders') }}">Manger Orders</a>
+													</li>
 													<li class="menu-item">
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 													</li>
@@ -109,6 +113,12 @@
 												<ul class="submenu curency" >
 													<li class="menu-item" >
 														<a title="Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+													</li>
+													<li class="menu-item" >
+														<a title="Manger Orders" href="{{ route('user.orders') }}">Manger Orders</a>
+													</li>
+													<li class="menu-item" >
+														<a title="Change Password" href="{{ route('user.change-password') }}">Change Password</a>
 													</li>
 													<li class="menu-item">
 														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
