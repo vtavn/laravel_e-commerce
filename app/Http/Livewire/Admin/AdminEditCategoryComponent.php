@@ -4,19 +4,31 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 
 class AdminEditCategoryComponent extends Component
 {
-    public $category_slug, $category_id, $name, $slug;
+    public $category_slug, $category_id, $name, $slug, $scategory_id, $scategory_slug;
 
-    public function mount($category_slug)
+    public function mount($category_slug,$scategory_slug=null)
     {
-        $this->category_slug = $category_slug;
-        $category = Category::where('slug', $category_slug)->first();
-        $this->category_id = $category->id;
-        $this->name = $category->name;
-        $this->slug = $category->slug;
+        if($scategory_slug)
+        {
+            $this->scategory_slug = $scategory_slug;
+            $scategory = SubCategory::where('slug', $scategory_slug)->first();
+            $this->scategory_id = $scategory->id;
+            $this->category_id = $scategory->category_id;
+            $this->name = $scategory->name;
+            $this->slug = $scategory->slug;
+        } else {
+            $this->category_slug = $category_slug;
+            $category = Category::where('slug', $category_slug)->first();
+            $this->category_id = $category->id;
+            $this->name = $category->name;
+            $this->slug = $category->slug;
+        }
+        
     }
 
     public function storeUpdateCategory()
@@ -32,15 +44,25 @@ class AdminEditCategoryComponent extends Component
                 'email.unique' => 'The Name has already been taken.',
             ]
         );
-
-        $category->name = $this->name;
-        $category->slug = Str::slug($this->name);
-        $category->save();
+        if($this->scategory_id)
+        {
+            $scategory = SubCategory::find($this->scategory_id);
+            $scategory->name = $this->name;
+            $scategory->slug = $this->slug;
+            $scategory->category_id = $this->category_id;
+            $scategory->save();
+        } else {
+            $category->name = $this->name;
+            $category->slug = Str::slug($this->name);
+            $category->save();
+        }
+        
         session()->flash('message', 'Category has been updated successfully.');
     }
 
     public function render()
     {
-        return view('livewire.admin.admin-edit-category-component')->layout('layouts.base');
+        $categories = Category::all();
+        return view('livewire.admin.admin-edit-category-component', compact('categories'))->layout('layouts.base');
     }
 }

@@ -6,7 +6,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-6">
-                                Add New Category
+                                All Category
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('admin.categories.add') }}" class="btn btn-success pull-right">Add Category</a>
@@ -23,6 +23,7 @@
                                     <td>Id</td>
                                     <td>Category Name</td>
                                     <td>Slug</td>
+                                    <th>Sub Category</th>
                                     <td>Action</td>
                                 </tr>
                             </thead>
@@ -32,6 +33,15 @@
                                         <th>{{ $category->id }}</th>
                                         <th>{{ $category->name }}</th>
                                         <th>{{ $category->slug }}</th>
+                                        <th>
+                                            <ul class="sclist">
+                                                @foreach ($category->subCategories as $scategory)
+                                                    <li><i class="fa fa-caret-right"></i> {{ $scategory->name }} <a href="{{route('admin.categories.edit',['category_slug'=>$category->slug,'scategory_slug'=>$scategory->slug])}}"><i class="fa fa-edit"></i></a>                                            
+                                                        <a href="#" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="deleteSubCategory({{$scategory->id}})" style="margin-left:10px;"><i class="fa fa-times text-danger"></i></a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </th>
                                         <th>
                                             <a href="{{route('admin.categories.edit', ['category_slug' => $category->slug])}}"><i class="fa fa-edit fa-2x"></i></a>
                                             <a href="#" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="deleteCategory({{$category->id}})" style="margin-left:10px;"><i class="fa fa-times fa-2x text-danger"></i></a>

@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Order;
+use App\Mail\OrderMail;
 use Livewire\Component;
 use App\Models\Shipping;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CheckoutComponent extends Component
@@ -95,6 +97,10 @@ class CheckoutComponent extends Component
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
+            if($item->options)
+            {
+                $orderItem->options = serialize($item->options);
+            }
             $orderItem->save();
         }
 
@@ -137,7 +143,15 @@ class CheckoutComponent extends Component
         }
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
+        //send mail
+        $this->sendOrderConfirmationMail($order);
+        
         session()->forget('checkout');
+
+    }
+
+    public function sendOrderConfirmationMail($order) {
+        Mail::to($order->email)->send(new OrderMail($order));
     }
 
     public function verifyForCheckout()

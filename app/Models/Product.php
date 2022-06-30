@@ -22,4 +22,14 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class, 'product_id');
     }
+
+    public function subCategories()
+    {
+        return $this->belongsTo(SubCategory::class, 'subcategory_id');
+    }
+
+    public function attributeValues()
+    {
+        return $this->hasMany(AttributeValue::class, 'product_id');
+    }
 }

@@ -25,6 +25,20 @@
                                     @error('name') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Parent Category</label>
+                                <div class="col-md-4">
+                                    <select class="form-control input-md" wire:model="parent_id">
+                                        <option value="">None</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('parent_id') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
