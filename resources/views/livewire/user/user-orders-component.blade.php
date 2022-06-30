@@ -35,8 +35,8 @@
                                         <td>{{ $order->total }}$</td>
                                         <td>{{ $order->firstname }}</td>
                                         <td>{{ $order->lastname }}</td>
-                                        <td>{{ $order->email }}</td>
                                         <td>{{ $order->phone }}</td>
+                                        <td>{{ $order->email }}</td>
                                         <td>{{ $order->zipcode }}</td>
                                         <td>{{ $order->status }}</td>
                                         <td>{{ $order->created_at }}</td>

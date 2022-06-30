@@ -61,4 +61,23 @@
 - php artisan make:model Review -m
 - php artisan make:livewire user/UserReviewComponent
 - php artisan make:livewire user/UserChangePasswordComponent
-- 
+
+- php artisan make:livewire ContactComponent
+- php artisan make:livewire admin/AdminContactComponent
+- php artisan make:model Contact -m
+- php artisan make:model Setting -m
+- php artisan make:livewire admin/AdminSettingComponent
+- php artisan make:livewire FooterComponent
+- php artisan make:mail OrderMail
+- php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="migrations"
+- php artisan make:model SubCategory -m
+- php artisan make:migration add_subcategory_id_to_products_table --table=products
+- php artisan make:model Profile -m
+- php artisan make:livewire user/UserProfileComponent
+- php artisan make:livewire user/UserEditProfileComponent
+- php artisan make:model ProductAttribute -m
+- php artisan make:livewire admin/AdminAttributesComponent
+- php artisan make:livewire admin/AdminAddAttributesComponent
+- php artisan make:livewire admin/AdminEditAttributesComponent
+- php artisan make:model AttributeValue -m
+- php artisan make:migration add_options_to_order_items_table --table=order_items

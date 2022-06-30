@@ -48,7 +48,6 @@
                         </div>
                     </div>
                     <div class="panel-body">
-
                         <div class="wrap-iten-in-cart">
                             <h3 class="box-title">Products Name</h3>
                             <ul class="products-cart">

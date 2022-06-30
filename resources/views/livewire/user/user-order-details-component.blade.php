@@ -52,7 +52,6 @@
                         </div>
                     </div>
                     <div class="panel-body">
-
                         <div class="wrap-iten-in-cart">
                             <h3 class="box-title">Products Name</h3>
                             <ul class="products-cart">
@@ -67,6 +66,13 @@
                                             <a class="link-to-product"
                                                 href="{{ route('product.details', ['slug' => $item->product->slug]) }}">{{ $item->product->name }}</a>
                                         </div>
+                                        @if ($item->options)
+                                            <div class="product-name">
+                                                @foreach (unserialize($item->options) as $key => $value)
+                                                    <p><b>{{$key}}: {{ $value}}</b></p>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                         <div class="price-field product-price">
                                             <p class="price">${{ $item->product->price }}</p>
                                         </div>

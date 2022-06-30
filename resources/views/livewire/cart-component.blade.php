@@ -26,6 +26,13 @@
 											<div class="product-name">
 												<a class="link-to-product" href="{{ route('product.details', ['slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
 											</div>
+
+											@foreach ($item->options as $key => $value)
+												<div style="vertical-align:middle; with:180px;">
+													<p><b>{{$key}}: </b> {{$value}}</p>
+												</div>
+											@endforeach
+
 											@if($item->model->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())  
 												<div class="price-field product-price"><p class="regprice">${{ $item->model->sale_price }}</p></div>                                 
 											@else   

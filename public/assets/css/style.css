@@ -7285,3 +7285,7 @@ p.text-sm.text-gray-700.leading-5 {
 .width-100-percent {
     width: 100%;
 }
+
+.sclist {
+    list-style: none;
+}
