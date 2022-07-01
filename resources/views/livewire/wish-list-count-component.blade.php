@@ -3,9 +3,9 @@
         <i class="fa fa-heart" aria-hidden="true"></i>
         <div class="left-info">
             @if (Cart::instance('wishlist')->count() > 0)
-                <span class="index">{{Cart::instance('wishlist')->count()}} item</span>
+                <span class="index">{{Cart::instance('wishlist')->count()}} {{ __('item') }}</span>
             @endif
-            <span class="title">Wishlist</span>
+            <span class="title">{{ __('Wishlist') }}</span>
         </div>
     </a>
 </div>

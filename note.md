@@ -81,3 +81,5 @@
 - php artisan make:livewire admin/AdminEditAttributesComponent
 - php artisan make:model AttributeValue -m
 - php artisan make:migration add_options_to_order_items_table --table=order_items
+
+- php artisan make:middleware Locale

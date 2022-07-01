@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\DetailsComponent;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankYouComponent;
@@ -56,83 +57,89 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', HomeComponent::class);
 
-Route::get('/shop', ShopComponent::class)->name('shop');
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('change-language/{language}', [HomeController::class, 'changeLanguage'])
+        ->name('user.change-language');
 
-Route::get('/cart', CartComponent::class)->name('product.cart');
+    Route::get('/', HomeComponent::class);
 
-Route::get('/checkout', CheckoutComponent::class)->name('checkout');
+    Route::get('/shop', ShopComponent::class)->name('shop');
 
-Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
+    Route::get('/cart', CartComponent::class)->name('product.cart');
 
-Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
+    Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 
-Route::get('/search', SearchComponent::class)->name('product.search');
+    Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 
-Route::get('/wishlist', WishListComponent::class)->name('product.wishlist');
+    Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
 
-Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
+    Route::get('/search', SearchComponent::class)->name('product.search');
 
-Route::get('/contact-us', ContactComponent::class)->name('contact');
+    Route::get('/wishlist', WishListComponent::class)->name('product.wishlist');
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
+    Route::get('/thank-you', ThankYouComponent::class)->name('thankyou');
 
-//For user
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
+    Route::get('/contact-us', ContactComponent::class)->name('contact');
 
-    Route::get('user/orders', UserOrdersComponent::class)->name('user.orders');
-    Route::get('user/orders/{order_id}', UserOrderDetailsComponent::class)->name('user.orders.details');
+    // Route::middleware([
+    //     'auth:sanctum',
+    //     config('jetstream.auth_session'),
+    //     'verified'
+    // ])->group(function () {
+    //     Route::get('/dashboard', function () {
+    //         return view('dashboard');
+    //     })->name('dashboard');
+    // });
 
-    Route::get('user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
+    //For user
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
 
-    Route::get('user/change-password', UserChangePasswordComponent::class)->name('user.change-password');
+        Route::get('user/orders', UserOrdersComponent::class)->name('user.orders');
+        Route::get('user/orders/{order_id}', UserOrderDetailsComponent::class)->name('user.orders.details');
 
-    Route::get('user/profile', UserProfileComponent::class)->name('user.profile');
-    Route::get('user/profile/edit', UserEditProfileComponent::class)->name('user.profile.edit');
-});
+        Route::get('user/review/{order_item_id}', UserReviewComponent::class)->name('user.review');
 
-//For admin
-Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->group(function () {
-    Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+        Route::get('user/change-password', UserChangePasswordComponent::class)->name('user.change-password');
 
-    Route::get('admin/category', AdminCategoryComponent::class)->name('admin.categories');
-    Route::get('admin/category/add', AdminAddCategoryComponent::class)->name('admin.categories.add');
-    Route::get('admin/category/edit/{category_slug}/{scategory_slug?}', AdminEditCategoryComponent::class)->name('admin.categories.edit');
+        Route::get('user/profile', UserProfileComponent::class)->name('user.profile');
+        Route::get('user/profile/edit', UserEditProfileComponent::class)->name('user.profile.edit');
+    });
 
-    Route::get('admin/product', AdminProductComponent::class)->name('admin.products');
-    Route::get('admin/product/add', AdminAddProductComponent::class)->name('admin.products.add');
-    Route::get('admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.products.edit');
-    
-    Route::get('admin/slider', AdminHomeSliderComponent::class)->name('admin.homeslider');
-    Route::get('admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.homeslider.add');
-    Route::get('admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.homeslider.edit');
-    
-    Route::get('admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
-    
-    Route::get('admin/sale', AdminSaleComponent::class)->name('admin.sale');
+    //For admin
+    Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->group(function () {
+        Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
 
-    Route::get('admin/coupons', AdminCouponComponent::class)->name('admin.coupons');
-    Route::get('admin/coupons/add', AdminAddCouponComponent::class)->name('admin.coupons.add');
-    Route::get('admin/coupons/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.coupons.edit');
+        Route::get('admin/category', AdminCategoryComponent::class)->name('admin.categories');
+        Route::get('admin/category/add', AdminAddCategoryComponent::class)->name('admin.categories.add');
+        Route::get('admin/category/edit/{category_slug}/{scategory_slug?}', AdminEditCategoryComponent::class)->name('admin.categories.edit');
 
-    Route::get('admin/orders', AdminOrderComponent::class)->name('admin.orders');
-    Route::get('admin/orders/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orders.details');
+        Route::get('admin/product', AdminProductComponent::class)->name('admin.products');
+        Route::get('admin/product/add', AdminAddProductComponent::class)->name('admin.products.add');
+        Route::get('admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.products.edit');
 
-    Route::get('admin/contact-us', AdminContactComponent::class)->name('admin.contact');
+        Route::get('admin/slider', AdminHomeSliderComponent::class)->name('admin.homeslider');
+        Route::get('admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.homeslider.add');
+        Route::get('admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.homeslider.edit');
 
-    Route::get('admin/settings', AdminSettingComponent::class)->name('admin.settings');
+        Route::get('admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
 
-    Route::get('admin/attributes', AdminAttributesComponent::class)->name('admin.attributes');
-    Route::get('admin/attributes/add', AdminAddAttributesComponent::class)->name('admin.attributes.add');
-    Route::get('admin/attributes/edit/{attribute_id}', AdminEditAttributesComponent::class)->name('admin.attributes.edit');
+        Route::get('admin/sale', AdminSaleComponent::class)->name('admin.sale');
+
+        Route::get('admin/coupons', AdminCouponComponent::class)->name('admin.coupons');
+        Route::get('admin/coupons/add', AdminAddCouponComponent::class)->name('admin.coupons.add');
+        Route::get('admin/coupons/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.coupons.edit');
+
+        Route::get('admin/orders', AdminOrderComponent::class)->name('admin.orders');
+        Route::get('admin/orders/{order_id}', AdminOrderDetailsComponent::class)->name('admin.orders.details');
+
+        Route::get('admin/contact-us', AdminContactComponent::class)->name('admin.contact');
+
+        Route::get('admin/settings', AdminSettingComponent::class)->name('admin.settings');
+
+        Route::get('admin/attributes', AdminAttributesComponent::class)->name('admin.attributes');
+        Route::get('admin/attributes/add', AdminAddAttributesComponent::class)->name('admin.attributes.add');
+        Route::get('admin/attributes/edit/{attribute_id}', AdminEditAttributesComponent::class)->name('admin.attributes.edit');
+    });
 });

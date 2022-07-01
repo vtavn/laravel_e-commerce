@@ -4,8 +4,8 @@
 
         <div class="wrap-breadcrumb">
             <ul>
-                <li class="item-link"><a href="/" class="link">home</a></li>
-                <li class="item-link"><span>detail</span></li>
+                <li class="item-link"><a href="/" class="link">{{ __('home') }}</a></li>
+                <li class="item-link"><span>{{ __('detail') }}</span></li>
             </ul>
         </div>
         <div class="row">
@@ -61,13 +61,13 @@
                         @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
                             <div class="wrap-price">
                                 <span class="product-price">${{ $product->sale_price }}</span>
-                                <del><span class="product-price price_old">${{ $product->price }}</span></del>
+                                <del><span class="product-price price_old">{{ $product->price }}{{ __('$') }}</span></del>
                             </div>
                         @else
                             <div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
                         @endif
                         <div class="stock-info in-stock">
-                            <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
+                            <p class="availability">{{ __('Availability') }}: <b>{{ $product->stock_status }}</b></p>
                         </div>
                         <div>
                             @foreach ($product->attributeValues->unique('product_attribute_id') as $av)
@@ -86,7 +86,7 @@
                             @endforeach
                         </div>
                         <div class="quantity" style="margin-top: 10px;">
-                            <span>Quantity:</span>
+                            <span>{{ __('Quantity') }}:</span>
                             <div class="quantity-input">
                                 <input type="text" name="product-quatity" value="1" data-max="120"
                                     pattern="[0-9]*" wire:model="qty">
@@ -98,24 +98,22 @@
                         <div class="wrap-butons">
                             @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
                                 <a href="#" class="btn add-to-cart"
-                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sale_price }})">Add
-                                    to Cart</a>
+                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->sale_price }})">{{ __('Add to Cart') }}</a>
                             @else
                                 <a href="#" class="btn add-to-cart"
-                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">Add
-                                    to Cart</a>
+                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">{{ __('Add to Cart') }}</a>
                             @endif
                             <div class="wrap-btn">
-                                <a href="#" class="btn btn-compare">Add Compare</a>
-                                <a href="#" class="btn btn-wishlist">Add Wishlist</a>
+                                <a href="#" class="btn btn-compare">{{ __('Add Compare') }}</a>
+                                <a href="#" class="btn btn-wishlist">{{ __('Add Wishlist') }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="advance-info">
                         <div class="tab-control normal">
-                            <a href="#description" class="tab-control-item active">description</a>
-                            <a href="#add_infomation" class="tab-control-item">Addtional Infomation</a>
-                            <a href="#review" class="tab-control-item">Reviews</a>
+                            <a href="#description" class="tab-control-item active">{{ __('description') }}</a>
+{{--                            <a href="#add_infomation" class="tab-control-item">Addtional Infomation</a>--}}
+                            <a href="#review" class="tab-control-item">{{ __('Reviews') }}</a>
                         </div>
                         <div class="tab-contents">
                             <div class="tab-content-item active" id="description">
@@ -190,9 +188,9 @@
                                 <a class="link-to-service" href="#">
                                     <i class="fa fa-truck" aria-hidden="true"></i>
                                     <div class="right-content">
-                                        <b class="title">Free Shipping</b>
-                                        <span class="subtitle">On Oder Over $99</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <b class="title">{{ __('Free Shipping') }}</b>
+                                        <span class="subtitle">{{ __('On Oder Over $99') }}</span>
+                                        <p class="desc"></p>
                                     </div>
                                 </a>
                             </li>
@@ -201,9 +199,9 @@
                                 <a class="link-to-service" href="#">
                                     <i class="fa fa-gift" aria-hidden="true"></i>
                                     <div class="right-content">
-                                        <b class="title">Special Offer</b>
-                                        <span class="subtitle">Get a gift!</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <b class="title">{{ __('Gift') }}</b>
+                                        <span class="subtitle">{{ __('Get a gift!') }}</span>
+                                        <p class="desc"></p>
                                     </div>
                                 </a>
                             </li>
@@ -212,9 +210,9 @@
                                 <a class="link-to-service" href="#">
                                     <i class="fa fa-reply" aria-hidden="true"></i>
                                     <div class="right-content">
-                                        <b class="title">Order Return</b>
-                                        <span class="subtitle">Return within 7 days</span>
-                                        <p class="desc">Lorem Ipsum is simply dummy text of the printing...</p>
+                                        <b class="title">{{ __('Order Return') }}</b>
+                                        <span class="subtitle">{{ __('Return within 7 days') }}</span>
+                                        <p class="desc"></p>
                                     </div>
                                 </a>
                             </li>
@@ -223,7 +221,7 @@
                 </div><!-- Categories widget-->
 
                 <div class="widget mercado-widget widget-product">
-                    <h2 class="widget-title">Popular Products</h2>
+                    <h2 class="widget-title">{{ __('Popular Products') }}</h2>
                     <div class="widget-content">
                         <ul class="products">
                             @foreach ($popular_products as $popular_product)
@@ -256,7 +254,7 @@
 
             <div class="single-advance-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="wrap-show-advance-info-box style-1 box-in-site">
-                    <h3 class="title-box">Related Products</h3>
+                    <h3 class="title-box">{{ __('Related Products') }}</h3>
                     <div class="wrap-products">
                         <div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5"
                             data-loop="false" data-nav="true" data-dots="false"
@@ -272,17 +270,17 @@
                                                     alt="{{ $related_product->name }}"></figure>
                                         </a>
                                         <div class="group-flash">
-                                            <span class="flash-item new-label">new</span>
+                                            <span class="flash-item new-label">{{ __('new') }}</span>
                                         </div>
                                         <div class="wrap-btn">
-                                            <a href="#" class="function-link">quick view</a>
+                                            <a href="#" class="function-link">{{ __('quick view') }}</a>
                                         </div>
                                     </div>
                                     <div class="product-info">
                                         <a href="{{ route('product.details', ['slug' => $related_product->slug]) }}"
                                             class="product-name"><span>{{ $related_product->name }}</span></a>
                                         <div class="wrap-price"><span
-                                                class="product-price">${{ $related_product->price }}</span></div>
+                                                class="product-price">{{ $related_product->price }}{{ __('$') }}</span></div>
                                     </div>
                                 </div>
                             @endforeach

@@ -4,8 +4,8 @@
 
         <div class="wrap-breadcrumb">
             <ul>
-                <li class="item-link"><a href="/" class="link">home</a></li>
-                <li class="item-link"><span>Wishlist</span></li>
+                <li class="item-link"><a href="/" class="link">{{ __('home') }}</a></li>
+                <li class="item-link"><span>{{ __('Wishlist') }}</span></li>
             </ul>
         </div>
         <div class="row">
@@ -21,8 +21,8 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{ route('product.details', ['slug' => $item->model->slug]) }}" class="product-name"><span>{{ $item->model->name }}</span></a>
-                                    <div class="wrap-price"><span class="product-price">${{ $item->model->price }}</span></div>
-                                    <a href="#" class="btn add-to-cart" wire:click.prevent="moveProductFormWishlistToCart('{{ $item->rowId }}')">Move To Cart</a>
+                                    <div class="wrap-price"><span class="product-price">{{ $item->model->price }}{{ __('$') }}</span></div>
+                                    <a href="#" class="btn add-to-cart" wire:click.prevent="moveProductFormWishlistToCart('{{ $item->rowId }}')">{{ __('Move To Cart') }}</a>
                                 <div class="product-wish">
                                     <a href="#" wire:click.prevent="removeWishList({{$item->model->id }});"><i class="fa fa-heart fill-heart"></i></a>
                                 </div>
@@ -32,7 +32,7 @@
                     @endforeach
                 </ul>
             @else
-            <p><h4>No Item in Wishlist</h4></p>
+            <p><h4>{{ __('No Item in Wishlist') }}</h4></p>
             @endif
         </div><!--end row-->
 

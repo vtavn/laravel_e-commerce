@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>	
+	<title>Home</title>
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
@@ -46,33 +46,33 @@
 						<div class="topbar-menu right-menu">
 							<ul>
 								<li class="menu-item lang-menu menu-item-has-children parent">
-									<a title="English" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+									@if (Session::get('website_language')=='vi')
+										<a title="Tiếng Việt" href="#">
+											<span class="img label-before">
+												<img src="{{ asset('assets/images/lang-vn.png') }}" width="20" alt="lang-vi">
+											</span>
+											Tiếng Việt<i class="fa fa-angle-down" aria-hidden="true"></i>
+										</a>
+									@else
+										<a title="English" href="#">
+											<span class="img label-before">
+												<img src="{{ asset('assets/images/lang-en.png') }}" width="20" alt="lang-en">
+											</span>
+											English<i class="fa fa-angle-down" aria-hidden="true"></i>
+										</a>
+									@endif
 									<ul class="submenu lang" >
-										<li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-hun.png') }}" alt="lang-hun"></span>Hungary</a></li>
-										<li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-ger.png') }}" alt="lang-ger" ></span>German</a></li>
-										<li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-fra.png') }}" alt="lang-fre"></span>French</a></li>
-										<li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{ asset('assets/images/lang-can.png') }}" alt="lang-can"></span>Canada</a></li>
+										<li class="menu-item" ><a title="Việt Nam" href="{!! route('user.change-language', ['vi']) !!}"><span class="img label-before"><img src="{{ asset('assets/images/lang-vn.png') }}" width="20" alt="lang-vi"></span>Việt Nam</a></li>
+										<li class="menu-item" ><a title="English" href="{!! route('user.change-language', ['en']) !!}"><span class="img label-before"><img src="{{ asset('assets/images/lang-en.png') }}" width="20" alt="lang-en"></span>English</a></li>
 									</ul>
 								</li>
-								<li class="menu-item menu-item-has-children parent" >
-									<a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-									<ul class="submenu curency" >
-										<li class="menu-item" >
-											<a title="Pound (GBP)" href="#">Pound (GBP)</a>
-										</li>
-										<li class="menu-item" >
-											<a title="Euro (EUR)" href="#">Euro (EUR)</a>
-										</li>
-										<li class="menu-item" >
-											<a title="Dollar (USD)" href="#">Dollar (USD)</a>
-										</li>
-									</ul>
-								</li>
+		
 								@if (Route::has('login'))
 									@auth
 										@if (Auth::user()->roles === 'admin')
 											<li class="menu-item menu-item-has-children parent" >
-												<a title="My Account" href="#">My Account ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<a title="{{ __('My Account') }}" href="#">{{ __('My Account') }} ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 												<ul class="submenu curency" >
 													<li class="menu-item" >
 														<a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
@@ -117,22 +117,22 @@
 											</li>
 										@else
 											<li class="menu-item menu-item-has-children parent" >
-												<a title="My Account" href="#">My Account ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+												<a title="{{ __('My Account') }}" href="#">{{ __('My Account') }} ({{Auth::user()->name}}) <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 												<ul class="submenu curency" >
 													<li class="menu-item" >
-														<a title="Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+														<a title="{{ __('Dashboard') }}" href="{{ route('user.dashboard') }}">{{ __('Dashboard') }}</a>
 													</li>
 													<li class="menu-item" >
-														<a title="Profile" href="{{ route('user.profile') }}">Profile</a>
+														<a title="{{ __('Profile') }}" href="{{ route('user.profile') }}">{{ __('Profile') }}</a>
 													</li>
 													<li class="menu-item" >
-														<a title="Manger Orders" href="{{ route('user.orders') }}">My Orders</a>
+														<a title="{{ __('My Orders') }}" href="{{ route('user.orders') }}">{{ __('My Orders') }}</a>
 													</li>
 													<li class="menu-item" >
-														<a title="Change Password" href="{{ route('user.change-password') }}">Change Password</a>
+														<a title="{{ __('Change Password') }}" href="{{ route('user.change-password') }}">{{ __('Change Password') }}</a>
 													</li>
 													<li class="menu-item">
-														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+														<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
 													</li>
 													<form id="logout-form" action="{{ route('logout') }}" method="post">
 														@csrf
@@ -141,8 +141,8 @@
 											</li>
 										@endif
 									@else
-										<li class="menu-item" ><a title="Register or Login" href="{{ route('login') }}">Login</a></li>
-										<li class="menu-item" ><a title="Register or Login" href="{{ route('register') }}">Register</a></li>
+										<li class="menu-item" ><a title="{{ __('Login') }}" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+										<li class="menu-item" ><a title="{{ __('Register') }}" href="{{ route('register') }}">{{ __('Register') }}</a></li>
 									@endif
 								@endif
 							</ul>
@@ -154,7 +154,7 @@
 					<div class="mid-section main-info-area">
 
 						<div class="wrap-logo-top left-section">
-							<a href="/" class="link-to-home"><img src="{{ asset('assets/images/logo-top-1.png') }}" alt="mercado"></a>
+							<a href="/" class="link-to-home"><img src="{{ asset('assets/images/logo-top-1.png') }}" alt=""></a>
 						</div>
 
 						@livewire('header-search-component')
@@ -194,20 +194,17 @@
 									<a href="/" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
 								</li>
 								<li class="menu-item">
-									<a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+									<a href="/shop" class="link-term mercado-item-title">{{ __('Shop') }}</a>
 								</li>
 								<li class="menu-item">
-									<a href="/shop" class="link-term mercado-item-title">Shop</a>
+									<a href="/cart" class="link-term mercado-item-title">{{ __('Cart') }}</a>
 								</li>
 								<li class="menu-item">
-									<a href="/cart" class="link-term mercado-item-title">Cart</a>
+									<a href="/checkout" class="link-term mercado-item-title">{{ __('Checkout') }}</a>
 								</li>
 								<li class="menu-item">
-									<a href="/checkout" class="link-term mercado-item-title">Checkout</a>
+									<a href="{{route('contact')}}" class="link-term mercado-item-title">{{ __('Contact us') }}</a>
 								</li>
-								<li class="menu-item">
-									<a href="{{route('contact')}}" class="link-term mercado-item-title">Contact Us</a>
-								</li>																	
 							</ul>
 						</div>
 					</div>
@@ -217,11 +214,12 @@
 	</header>
 
 	<!--main area-->
+
   	{{$slot}}
 	<!--main area-->
 
 	@livewire('footer-component')
-	
+
 	<script src="{{ asset('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
 	<script src="{{ asset('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
