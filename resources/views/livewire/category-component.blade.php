@@ -1,3 +1,6 @@
+@section('title')
+{{ $category_name }} - {{ config('app.name', 'Laravel') }}
+@endsection
 <main id="main" class="main-site left-sidebar">
 
     <div class="container">
@@ -12,11 +15,13 @@
 
             <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 
-                <div class="banner-shop">
-                    <a href="#" class="banner-link">
-                        <figure><img src="{{ asset('assets/images/shop-banner.jpg') }}" alt=""></figure>
-                    </a>
-                </div>
+                @if ($setting->banner_home_category)
+                    <div class="banner-shop">
+                        <a href="#" class="banner-link">
+                            <figure><img src="{{ asset('assets/images') }}/{{ $setting->banner_home_category }}" alt=""></figure>
+                        </a>
+                    </div>
+                @endif
 
                 <div class="wrap-shop-control">
 

@@ -1,6 +1,8 @@
+@section('title')
+{{__('Thank You')}} - {{ config('app.name', 'Laravel') }}
+@endsection
 <main id="main" class="main-site">
-
-    <div class="container">
+<div class="container">
 
         <div class="wrap-breadcrumb">
             <ul>

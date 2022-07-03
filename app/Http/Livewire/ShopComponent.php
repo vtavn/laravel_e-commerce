@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Cart;
 use App\Models\Product;
+use App\Models\Setting;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
@@ -36,8 +37,9 @@ class ShopComponent extends Component
             Cart::instance('cart')->store(Auth::user()->email);
             Cart::instance('wishlist')->store(Auth::user()->email);
         }
+        $setting = Setting::find(1);
 
-        return view('livewire.shop-component', compact('products', 'categories', 'witems'))->layout('layouts.base');
+        return view('livewire.shop-component', compact('products', 'categories', 'witems', 'setting'))->layout('layouts.base');
     }
 
     public function store($product_id, $product_name, $product_price)

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Cart;
 use App\Models\Product;
+use App\Models\Setting;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -62,7 +63,7 @@ class CategoryComponent extends Component
         }
 
         $categories = Category::all();
-
-        return view('livewire.category-component', compact('products', 'categories', 'category_name'))->layout('layouts.base');
+        $setting = Setting::find(1);
+        return view('livewire.category-component', compact('products', 'categories', 'category_name', 'setting'))->layout('layouts.base');
     }
 }

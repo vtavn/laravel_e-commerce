@@ -1,10 +1,13 @@
+@section('title')
+{{__('Profile')}} - {{ config('app.name', 'Laravel') }}
+@endsection
 <div>
     <div class="container pt-30">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Profile
+                        {{ __('Profile') }}
                     </div>
                     <div class="panel-body">
                         <div class="col-md-4">
@@ -15,17 +18,17 @@
                             @endif    
                         </div>
                         <div class="col-md-8">
-                            <p><b>Name:</b> {{ $user->name }}</p>
-                            <p><b>Email:</b> {{ $user->email }}</p>
-                            <p><b>Phone:</b> {{ $user->profile->phone }}</p>
+                            <p><b>{{ __('Name') }}:</b> {{ $user->name }}</p>
+                            <p><b>{{ __('Email') }}:</b> {{ $user->email }}</p>
+                            <p><b>{{ __('Phone') }}:</b> {{ $user->profile->phone }}</p>
                             <hr>
-                            <p><b>Address:</b> {{ $user->profile->address }}</p>
-                            <p><b>Address 2:</b> {{ $user->profile->address_2 }}</p>
-                            <p><b>City:</b> {{ $user->profile->city }}</p>
-                            <p><b>Province:</b> {{ $user->profile->province }}</p>
-                            <p><b>Country:</b> {{ $user->profile->country }}</p>
-                            <p><b>Zipcode:</b> {{ $user->profile->zipcode }}</p>
-                            <a href="{{route('user.profile.edit')}}" class="btn btn-info pull-right">Update Profile</a>
+                            <p><b>{{ __('Address') }}:</b> {{ $user->profile->address }}</p>
+                            <p><b>{{ __('Address') }} 2:</b> {{ $user->profile->address_2 }}</p>
+                            <p><b>{{ __('City') }}:</b> {{ $user->profile->city }}</p>
+                            <p><b>{{ __('Province') }}:</b> {{ $user->profile->province }}</p>
+                            <p><b>{{ __('Country') }}:</b> {{ $user->profile->country }}</p>
+                            <p><b>{{ __('Zipcode') }}:</b> {{ $user->profile->zipcode }}</p>
+                            <a href="{{route('user.profile.edit')}}" class="btn btn-info pull-right">{{ __('Update') }} {{ __('Profile') }}</a>
                         </div>
                     </div>
                 </div>
