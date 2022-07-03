@@ -1,0 +1,87 @@
+# Command 
+- composer require livewire/livewire
+- php artisan make:livewire HomeComponent
+- php artisan make:livewire ShopComponent
+- php artisan make:livewire CartComponent
+- php artisan make:livewire CheckoutComponent
+- 
+- composer require laravel/Jetstream
+- php artisan jetstream:install livewire
+- npm install
+- npm run dev
+- php artisan migrate
+- php artisan make:middleware AuthAdmin
+- php artisan make:livewire admin/AdminDashboardComponent
+- php artisan make:livewire user/UserDashboardComponent
+- php artisan make:model Category -m
+- php artisan make:model Product -m
+- php artisan make:factory CategoryFactory --model=Category
+- php artisan make:factory ProductFactory --model=Product
+- php artisan db:seed
+- php artisan make:livewire DetailsComponent
+- php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
+
+- php artisan make:livewire CategoryComponent
+- php artisan make:livewire HeaderSearchComponent
+- php artisan make:livewire SearchComponent
+- php artisan make:livewire admin/AdminCategoryComponent
+- php artisan make:livewire admin/AdminAddCategoryComponent
+- php artisan make:livewire admin/AdminProductComponent
+- php artisan make:livewire admin/AdminAddProductComponent
+- php artisan make:livewire admin/AdminEditProductComponent
+- php artisan make:model HomeSlider -m
+- php artisan make:livewire admin/AdminHomeSliderComponent
+- php artisan make:livewire admin/AdminAddHomeSliderComponent
+- php artisan make:livewire admin/AdminEditHomeSliderComponent
+- php artisan make:livewire admin/AdminHomeCategoryComponent
+- php artisan make:model HomeCategory -m
+- php artisan make:model Sale -m
+- php artisan make:livewire admin/AdminSaleComponen
+
+- php artisan make:livewire WishListCountComponent
+- php artisan make:livewire CartCountComponent
+- php artisan make:livewire WishListComponent
+- php artisan make:model Coupon -m
+- php artisan make:livewire admin/adminCouponComponent
+- php artisan make:livewire admin/adminAddCouponComponent
+- php artisan make:livewire admin/adminEditCouponComponent
+- php artisan make:migration add_expiry_date_to_coupons_table --table=coupons
+- php artisan make:model Order -m
+- php artisan make:model OrderItem -m
+- php artisan make:model Shipping -m
+- php artisan make:model Transaction -m
+
+- php artisan make:livewire ThankYouComponent
+- V42 + "cartalyst/stripe-laravel": "^13.0" + composer -> composer update | no using
+- php artisan make:livewire admin/AdminOrderComponent
+- php artisan make:livewire admin/AdminOrderDetailsComponent
+- php artisan make:livewire user/UserOrdersComponent
+- php artisan make:livewire user/UserOrderDetailsComponent
+- php artisan make:migration add_delivered_canceled_to_orders_table --table=orders
+- php artisan make:model Review -m
+- php artisan make:livewire user/UserReviewComponent
+- php artisan make:livewire user/UserChangePasswordComponent
+
+- php artisan make:livewire ContactComponent
+- php artisan make:livewire admin/AdminContactComponent
+- php artisan make:model Contact -m
+- php artisan make:model Setting -m
+- php artisan make:livewire admin/AdminSettingComponent
+- php artisan make:livewire FooterComponent
+- php artisan make:mail OrderMail
+- php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="migrations"
+- php artisan make:model SubCategory -m
+- php artisan make:migration add_subcategory_id_to_products_table --table=products
+- php artisan make:model Profile -m
+- php artisan make:livewire user/UserProfileComponent
+- php artisan make:livewire user/UserEditProfileComponent
+- php artisan make:model ProductAttribute -m
+- php artisan make:livewire admin/AdminAttributesComponent
+- php artisan make:livewire admin/AdminAddAttributesComponent
+- php artisan make:livewire admin/AdminEditAttributesComponent
+- php artisan make:model AttributeValue -m
+- php artisan make:migration add_options_to_order_items_table --table=order_items
+
+- php artisan make:middleware Locale
+
+- php artisan vendor:publish --provider="Telegram\Bot\Laravel\TelegramServiceProvider"
