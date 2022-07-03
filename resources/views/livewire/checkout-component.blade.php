@@ -1,4 +1,7 @@
-	<main id="main" class="main-site">
+@section('title')
+{{ __('Checkout') }} - {{ config('app.name', 'Laravel') }}
+@endsection
+<main id="main" class="main-site">
 		<div class="container">
 			<div class="wrap-breadcrumb">
 				<ul>

@@ -1,3 +1,6 @@
+@section('title')
+{{ __('Contacts') }} - {{ config('app.name', 'Laravel') }}
+@endsection
 <div>
     <main id="main" class="main-site left-sidebar">
 

@@ -1,3 +1,6 @@
+@section('title')
+{{ $product->name }} - {{ config('app.name', 'Laravel') }}
+@endsection
 <main id="main" class="main-site">
 
     <div class="container">
@@ -67,7 +70,12 @@
                             <div class="wrap-price"><span class="product-price">${{ $product->price }}</span></div>
                         @endif
                         <div class="stock-info in-stock">
-                            <p class="availability">{{ __('Availability') }}: <b>{{ $product->stock_status }}</b></p>
+                            
+                            <p class="availability">{{ __('Availability') }}: <b>@if ($product->stock_status == 'instock')
+                                Còn hàng
+                            @else
+                                Hết hàng
+                            @endif</b></p>
                         </div>
                         <div>
                             @foreach ($product->attributeValues->unique('product_attribute_id') as $av)

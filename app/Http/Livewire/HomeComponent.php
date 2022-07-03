@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use Cart;
 use App\Models\Sale;
 use App\Models\Product;
+use App\Models\Setting;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\HomeSlider;
 use App\Models\HomeCategory;
 use Illuminate\Support\Facades\Auth;
-use Cart;
 
 class HomeComponent extends Component
 {
@@ -29,6 +30,7 @@ class HomeComponent extends Component
             Cart::instance('wishlist')->restore(Auth::user()->email);
 
         }
-        return view('livewire.home-component', compact('sliders', 'lastProducts', 'categories', 'numberOfProducts', 'saleProducts', 'sale'))->layout('layouts.base');
+        $setting = Setting::find(1);
+        return view('livewire.home-component', compact('sliders', 'lastProducts', 'categories', 'numberOfProducts', 'saleProducts', 'sale', 'setting'))->layout('layouts.base');
     }
 }

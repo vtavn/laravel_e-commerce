@@ -1,3 +1,6 @@
+@section('title')
+{{__('Wishlist')}} - {{ config('app.name', 'Laravel') }}
+@endsection
 <main id="main" class="main-site left-sidebar">
 
     <div class="container">

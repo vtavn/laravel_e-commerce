@@ -1,3 +1,6 @@
+@section('title')
+{{__('Add Review')}} - {{ config('app.name', 'Laravel') }}
+@endsection
 <div>
     <div class="container pt-30">
         <div class="row">
@@ -5,7 +8,7 @@
                 <div id="review_form_wrapper">
 
                     <div id="comments">
-                        <h2 class="woocommerce-Reviews-title">Add review for</h2>
+                        <h2 class="woocommerce-Reviews-title">{{ __('Add review for') }}</h2>
                         <ol class="commentlist">
                             <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
                                 <div id="comment-20" class="comment_container"> 
@@ -28,7 +31,7 @@
 
                             <form action="#" method="post" id="commentform" class="comment-form" novalidate="" wire:submit.prevent="addReview">
                                 <div class="comment-form-rating">
-                                    <span>Your rating</span>
+                                    <span>{{ __('Your rating') }}</span>
                                     <p class="stars">
                                         
                                         <label for="rated-1"></label>
@@ -47,7 +50,7 @@
                                     @enderror
                                 </div>
                                 <p class="comment-form-comment">
-                                    <label for="comment">Your review <span class="required">*</span>
+                                    <label for="comment">{{ __('Your review') }} <span class="required">*</span>
                                     </label>
                                     @error('comment')
                                         <span class="error">{{ $message }}</span>
@@ -55,7 +58,7 @@
                                     <textarea id="comment" name="comment" cols="45" rows="8" wire:model="comment"></textarea>
                                 </p>
                                 <p class="form-submit">
-                                    <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                    <input name="submit" type="submit" id="submit" class="submit" value="{{ __('Submit') }}">
                                 </p>
                             </form>
 
