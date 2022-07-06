@@ -4,10 +4,11 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Setting;
 use Livewire\Component;
+use App\Models\Category;
 
 class AdminSettingComponent extends Component
 {
-    public $email, $phone, $phone_2, $address, $map, $twiter, $facebook, $telegram, $instagram, $youtube;
+    public $email, $phone, $phone_2, $address, $map, $twiter, $facebook, $telegram, $instagram, $youtube, $category_home,$banner_home, $banner_home_2, $banner_home_product_new, $banner_home_category_new, $banner_shop, $banner_home_category;
 
     public function mount()
     {
@@ -23,6 +24,13 @@ class AdminSettingComponent extends Component
             $this->telegram = $setting->telegram;
             $this->instagram = $setting->instagram;
             $this->youtube = $setting->youtube;
+            $this->category_home = explode(',', $setting->header_category);
+            $this->banner_home = $setting->banner_home;
+            $this->banner_home_2 = $setting->banner_home_2;
+            $this->banner_home_product_new = $setting->banner_home_product_new;
+            $this->banner_home_category_new = $setting->banner_home_category_new;
+            $this->banner_shop = $setting->banner_shop;
+            $this->banner_home_category = $setting->banner_home_category;
         }
     }
 
@@ -73,14 +81,22 @@ class AdminSettingComponent extends Component
         $setting->telegram = $this->telegram;
         $setting->instagram = $this->instagram;
         $setting->youtube = $this->youtube;
+        $setting->banner_home = $this->banner_home;
+        $setting->banner_home_2 = $this->banner_home_2;
+        $setting->banner_home_product_new = $this->banner_home_product_new;
+        $setting->banner_home_category_new = $this->banner_home_category_new;
+        $setting->banner_shop = $this->banner_shop;
+        $setting->banner_home_category = $this->banner_home_category;
+        $setting->header_category = implode(',', $this->category_home);
         $setting->save();
-
-        session()->flash('message', 'Setting has been saved successfully.');
+        
+        return redirect()->route('admin.settings')->with('message', 'Setting has been saved successfully.');
 
     }
 
     public function render()
     {
-        return view('livewire.admin.admin-setting-component')->layout('layouts.admin');
+        $categories = Category::all();
+        return view('livewire.admin.admin-setting-component', compact('categories'))->layout('layouts.admin');
     }
 }
