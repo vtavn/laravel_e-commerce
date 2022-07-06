@@ -31,8 +31,8 @@
                             <div class="form-group">
                                 <label class="control-label ">{{ __('Product Name') }}</label>
                                 <div class="">
-                                    <input type="text" placeholder="{{ __('Product Name') }}" class="form-control input-md"
-                                        wire:model="name" wire:keyup="generateSlug" />
+                                    <input type="text" placeholder="{{ __('Product Name') }}"
+                                        class="form-control input-md" wire:model="name" wire:keyup="generateSlug" />
                                 </div>
                             </div>
 
@@ -174,21 +174,28 @@
                                 </div>
                             </div>
 
-                            @foreach ($inputs as $key => $value)
-                                <div class="form-group">
-                                    <label class="control-label ">{{ $pattributes->where('id', $attribute_arr[$key])->first()->name }}</label>
-                                    <div class="col-md-3">
-                                        <input type="text"
-                                            placeholder="{{ $pattributes->where('id', $attribute_arr[$key])->first()->name }}"
-                                            class="form-control input-md"
-                                            wire:model="attribute_values.{{ $value }}" />
+                            <div class="row">
+                                @foreach ($inputs as $key => $value)
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label
+                                                class="control-label ">{{ $pattributes->where('id', $attribute_arr[$key])->first()->name }}</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input type="text"
+                                                        placeholder="{{ $pattributes->where('id', $attribute_arr[$key])->first()->name }}"
+                                                        class="form-control input-md"
+                                                        wire:model="attribute_values.{{ $value }}" />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        wire:click.prevent="remove({{ $key }})">{{ __('Remove') }}</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                            wire:click.prevent="remove({{ $key }})">{{ __('Remove') }}</button>
-                                    </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
 
                             <div class="form-group">
                                 <label class="control-label "></label>
