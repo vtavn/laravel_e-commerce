@@ -15,33 +15,6 @@ class ShopComponent extends Component
     use WithPagination;
     public $sorting, $pageSize;
 
-    public function render()
-    {
-        $witems = Cart::instance('wishlist')->content()->pluck('id');
-
-        if($this->sorting == 'date')
-        {
-            $products = Product::orderBy('created_at', 'desc')->paginate($this->pageSize);
-        } else if($this->sorting == 'price') {
-            $products = Product::orderBy('price', 'asc')->paginate($this->pageSize);
-        } else if($this->sorting == 'price-desc') {
-            $products = Product::orderBy('price', 'desc')->paginate($this->pageSize);
-        } else {
-            $products = Product::paginate($this->pageSize);
-        }
-
-        $categories = Category::all();
-
-        if(Auth::check())
-        {
-            Cart::instance('cart')->store(Auth::user()->email);
-            Cart::instance('wishlist')->store(Auth::user()->email);
-        }
-        $setting = Setting::find(1);
-
-        return view('livewire.shop-component', compact('products', 'categories', 'witems', 'setting'))->layout('layouts.base');
-    }
-
     public function store($product_id, $product_name, $product_price)
     {
         
@@ -74,4 +47,31 @@ class ShopComponent extends Component
         $this->pageSize = 12;
     }
 
+    public function render()
+    {
+        $witems = Cart::instance('wishlist')->content()->pluck('id');
+
+        if($this->sorting == 'date')
+        {
+            $products = Product::orderBy('created_at', 'desc')->paginate($this->pageSize);
+        } else if($this->sorting == 'price') {
+            $products = Product::orderBy('price', 'asc')->paginate($this->pageSize);
+        } else if($this->sorting == 'price-desc') {
+            $products = Product::orderBy('price', 'desc')->paginate($this->pageSize);
+        } else {
+            $products = Product::paginate($this->pageSize);
+        }
+
+        $categories = Category::all();
+
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
+        $setting = Setting::find(1);
+
+        return view('livewire.shop-component', compact('products', 'categories', 'witems', 'setting'))->layout('layouts.base');
+    }
+    
 }
