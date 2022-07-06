@@ -42,7 +42,7 @@ class AdminEditProductComponent extends Component
 
 
         foreach ($this->attribute_arr as $a_arr) {
-            $allAttributeValue = AttributeValue::where('product_id' , $product->id)->where('product_attribute_id', $a_arr)->get()->pluck('value');
+            $allAttributeValue = AttributeValue::where('product_id', $product->id)->where('product_attribute_id', $a_arr)->get()->pluck('value');
             $valueString = '';
             foreach ($allAttributeValue as $value) {
                 $valueString = $valueString . $value . ',';
@@ -53,10 +53,10 @@ class AdminEditProductComponent extends Component
 
     public function add()
     {
-        if (!$this->attribute_arr->contains($this->attr)) {
-            $this->inputs->push($this->attr);
-            $this->attribute_arr->push($this->attr);
-        }
+            if (!$this->attribute_arr->contains($this->attr)) {
+                $this->inputs->push($this->attr);
+                $this->attribute_arr->push($this->attr);
+            }
     }
 
     public function remove($attr)
