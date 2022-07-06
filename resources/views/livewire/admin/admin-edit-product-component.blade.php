@@ -161,13 +161,30 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="control-label ">{{ __('Sub Category') }}</label>
                                 <div class="">
                                     <select class="form-control" wire:model="scategory_id">
                                         <option value="0">{{ __('Select Sub Category') }}</option>
                                         @foreach ($scategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">{{ __('Choose Categories') }}</label>
+                                <div class="col-md-4" wire:ignore>
+                                    <select name="categories[]" multiple="multiple" class="select_categories form-control" wire:model="scategory_id">
+                                        @foreach ($scategories as $category)
+                                            <option
+                                            @if ($scategory_id != null)
+                                                @if (in_array($category->id, $scategory_id))
+                                                    selected
+                                                @endif
+                                            @endif
+                                            value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -230,3 +247,18 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            $('.select_categories').select2({
+                theme: 'bootstrap4'
+            });
+            $('.select_categories').on('change', function(e){
+                var data = $('.select_categories').select2("val");
+                @this.set('scategory_id', data);
+            });
+            
+        });
+    </script>
+@endpush

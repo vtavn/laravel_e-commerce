@@ -36,7 +36,9 @@ class AdminEditProductComponent extends Component
         $this->images = $product->images;
         $this->category_id = $product->category_id;
         $this->product_id = $product->id;
-        $this->scategory_id = $product->subcategory_id;
+        // $this->scategory_id = $product->subcategory_id;
+        $this->scategory_id = explode(',', $product->subcategory_id);
+
         $this->inputs = $product->attributeValues->where('product_id', $product->id)->unique('product_attribute_id')->pluck('product_attribute_id');
         $this->attribute_arr = $product->attributeValues->where('product_id', $product->id)->unique('product_attribute_id')->pluck('product_attribute_id');
 
@@ -99,7 +101,8 @@ class AdminEditProductComponent extends Component
             $product->images = $imagesImage;
         }
         if ($this->scategory_id) {
-            $product->subcategory_id = $this->scategory_id;
+            // $product->subcategory_id = $this->scategory_id;
+            $product->subcategory_id = implode(',', $this->scategory_id);
         }
         $product->save();
 
@@ -125,7 +128,7 @@ class AdminEditProductComponent extends Component
     public function render()
     {
         $categories = Category::all();
-        $scategories = SubCategory::where('category_id', $this->category_id)->get();
+        $scategories = SubCategory::all();
         $pattributes = ProductAttribute::all();
 
         return view('livewire.admin.admin-edit-product-component', compact('categories', 'scategories', 'pattributes'))->layout('layouts.admin');
